@@ -1,0 +1,26 @@
+{
+  "name": "team-profile-generator-nodejs",
+  "version": "1.0.0",
+  "description": "A nodejs application that prompts a manager to generator a team profile using inquirer",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs/issues"
+  },
+  "homepage": "https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
+}
