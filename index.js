@@ -9,15 +9,6 @@ const { create } = require('domain');
 
 const teamMembers = [];
 
-// function generateHTML(teamMembers)
-//   fs.writeFileSync('index.html', generateHTML, (error) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       console.log('Your HTML file has been created.');
-//     }
-//   });
-
 const createTeam = async () => {
   return await inquirer
     .prompt([
@@ -41,6 +32,7 @@ const createTeam = async () => {
               engineerInput.engineer_github
             );
             teamMembers.push(engineer);
+            console.log(engineer);
             createTeam();
           });
       } else if (response.team_role === 'Intern') {
@@ -51,9 +43,10 @@ const createTeam = async () => {
               internInput.intern_name,
               internInput.intern_id,
               internInput.intern_email,
-              internInput.intern_school
+              internInput.school
             );
             teamMembers.push(intern);
+            console.log(intern);
             createTeam();
           });
       } else if (response.team_role === 'I do not want to add a team member.') {
@@ -76,6 +69,8 @@ const createManager = async () => {
     createTeam();
   });
 };
+
+function writeToFile() {}
 
 function init() {
   console.log(`Welcome to the Team Profile Generator! Let's build your team: `);
