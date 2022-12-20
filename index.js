@@ -4,7 +4,7 @@ const Intern = require('./lib/Intern.js');
 const inquirer = require('inquirer');
 const fs = require('fs');
 const questions = require('./lib/questions.js');
-const generateHTML = require('./dist/generateHTML.js');
+const generateHTML = require('./src/generateHTML.js');
 const { create } = require('domain');
 
 const teamMembers = [];
@@ -70,11 +70,18 @@ const createManager = async () => {
   });
 };
 
-function writeToFile() {}
+const teamHTML = generateHTML(teamMembers);
+fs.writeFileSync('index.html', teamHTML, (error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Your HTML file has been created.');
+  }
+});
 
-function init() {
+async function init() {
   console.log(`Welcome to the Team Profile Generator! Let's build your team: `);
-  createManager();
+  await createManager();
 }
 
 init();
