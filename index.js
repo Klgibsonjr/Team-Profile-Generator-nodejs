@@ -3,22 +3,20 @@ const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Manager = require('./lib/Manager');
-const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern');
-const questions = require('./lib/questions');
+const questions = require('./lib/questions.js');
 const generateHTML = require('./dist/generateHTML.js');
+const { create } = require('domain');
 
 const teamMembers = [];
 
-generateHTML(teamMembers);
-fs.writeFileSync('index.html', generateHTML, (error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Your HTML file has been created.');
-  }
-});
+// function generateHTML(teamMembers)
+//   fs.writeFileSync('index.html', generateHTML, (error) => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       console.log('Your HTML file has been created.');
+//     }
+//   });
 
 const createTeam = async () => {
   return await inquirer
@@ -43,6 +41,7 @@ const createTeam = async () => {
               engineerInput.engineer_github
             );
             teamMembers.push(engineer);
+            createTeam();
           });
       } else if (response.team_role === 'Intern') {
         return await inquirer
@@ -55,10 +54,10 @@ const createTeam = async () => {
               internInput.intern_school
             );
             teamMembers.push(intern);
+            createTeam();
           });
       } else if (response.team_role === 'I do not want to add a team member.') {
         console.log('Your new team has been created!');
-        return;
       }
     });
 };
@@ -72,6 +71,7 @@ const createManager = async () => {
       input.manager_officeNum
     );
     teamMembers.push(manager);
+    console.log(manager);
 
     createTeam();
   });
