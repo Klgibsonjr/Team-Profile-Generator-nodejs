@@ -91,25 +91,3 @@ const writeFile = (data) => {
 };
 
 createManager();
-// .then(createTeam)
-// .then((teamMembers) => {
-//   return generateHTML(teamMembers);
-// })
-// .then((data) => {
-//   return writeFile(data);
-// })
-// .catch((error) => {
-//   console.log(error);
-// });
-
-// function init() {
-//   console.log(`\n      ** Welcome to Team Profile Generator **
-
-//   Answer the prompts below to generate your team!\n
-//   -----------------------------------------------\n`);
-//   createManager().then((data) => {
-//     writeToFile('./dist/sampleIndex.html', generateHTML(teamMembers));
-//   });
-// }
-
-// init();
