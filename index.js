@@ -1,16 +1,30 @@
-const Manager = require('./lib/Manager.js');
-const Engineer = require('./lib/Engineer.js');
-const Intern = require('./lib/Intern.js');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const fs = require('fs');
-const questions = require('./lib/questions.js');
-const generateHTML = require('./src/generateHTML.js');
-const { create } = require('domain');
+const questions = require('./lib/questions');
+const generateHTML = require('./src/generateHTML');
 
 const teamMembers = [];
 
-const createTeam = async () => {
-  return await inquirer
+const createManager = () => {
+  return inquirer.prompt(questions.managerQuestions).then((input) => {
+    const manager = new Manager(
+      input.manager_name,
+      input.manager_id,
+      input.manager_email,
+      input.manager_officeNum
+    );
+    teamMembers.push(manager);
+    // console.log(manager);
+
+    createTeam();
+  });
+};
+
+const createTeam = () => {
+  return inquirer
     .prompt([
       {
         type: 'list',
@@ -20,9 +34,9 @@ const createTeam = async () => {
         choices: ['Engineer', 'Intern', 'I do not want to add a team member.'],
       },
     ])
-    .then(async function (response) {
-      if (response.team_role === 'Engineer') {
-        return await inquirer
+    .then(function (data) {
+      if (data.team_role === 'Engineer') {
+        return inquirer
           .prompt(questions.engineerQuestions)
           .then(function (engineerInput) {
             const engineer = new Engineer(
@@ -32,11 +46,11 @@ const createTeam = async () => {
               engineerInput.engineer_github
             );
             teamMembers.push(engineer);
-            console.log(engineer);
+            // console.log(engineer);
             createTeam();
           });
-      } else if (response.team_role === 'Intern') {
-        return await inquirer
+      } else if (data.team_role === 'Intern') {
+        return inquirer
           .prompt(questions.internQuestions)
           .then(function (internInput) {
             const intern = new Intern(
@@ -46,42 +60,42 @@ const createTeam = async () => {
               internInput.school
             );
             teamMembers.push(intern);
-            console.log(intern);
+            // console.log(intern);
             createTeam();
           });
-      } else if (response.team_role === 'I do not want to add a team member.') {
+      } else if (data.team_role === 'I do not want to add a team member.') {
         console.log('Your new team has been created!');
+      } else {
+        return teamMembers;
       }
     });
 };
 
-const createManager = async () => {
-  return await inquirer.prompt(questions.managerQuestions).then((input) => {
-    const manager = new Manager(
-      input.manager_name,
-      input.manager_id,
-      input.manager_email,
-      input.manager_officeNum
-    );
-    teamMembers.push(manager);
-    console.log(manager);
-
-    createTeam();
+function writeToFile(filename, data) {
+  fs.writeFile(filename, data, (error) => {
+    if (error) {
+      console.log(error);
+      return;
+    } else {
+      console.log('Your team profiles have been generated!');
+    }
   });
-};
-
-const teamHTML = generateHTML(teamMembers);
-fs.writeFileSync('index.html', teamHTML, (error) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Your HTML file has been created.');
-  }
-});
-
-async function init() {
-  console.log(`Welcome to the Team Profile Generator! Let's build your team: `);
-  await createManager();
 }
 
-init();
+createManager()
+  .then(createTeam)
+  .then((teamMembers) => {
+    return generateHTML(teamMembers);
+  });
+
+// function init() {
+//   console.log(`\n      ** Welcome to Team Profile Generator **
+
+//   Answer the prompts below to generate your team!\n
+//   -----------------------------------------------\n`);
+//   createManager().then((data) => {
+//     writeToFile('./dist/sampleIndex.html', generateHTML(teamMembers));
+//   });
+// }
+
+// init();
