@@ -9,15 +9,15 @@ const generateHTML = require('./src/generateHTML');
 const teamMembers = [];
 
 const createManager = () => {
-  return inquirer.prompt(questions.managerQuestions).then((input) => {
+  return inquirer.prompt(questions.managerQuestions).then((managerInput) => {
     const manager = new Manager(
-      input.manager_name,
-      input.manager_id,
-      input.manager_email,
-      input.manager_officeNum
+      managerInput.manager_name,
+      managerInput.manager_id,
+      managerInput.manager_email,
+      managerInput.manager_officeNumber
     );
     teamMembers.push(manager);
-    // console.log(manager);
+    console.log(manager);
 
     createTeam();
   });
@@ -46,7 +46,7 @@ const createTeam = () => {
               engineerInput.engineer_github
             );
             teamMembers.push(engineer);
-            // console.log(engineer);
+            console.log(engineer);
             createTeam();
           });
       } else if (data.team_role === 'Intern') {
@@ -60,19 +60,24 @@ const createTeam = () => {
               internInput.school
             );
             teamMembers.push(intern);
-            // console.log(intern);
+            console.log(intern);
             createTeam();
           });
       } else if (data.team_role === 'I do not want to add a team member.') {
         console.log('Your new team has been created!');
-      } else {
-        return teamMembers;
+        generateHTML(teamMembers)
+          .then((data) => {
+            return writeFile(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
 };
 
-function writeToFile(filename, data) {
-  fs.writeFile(filename, data, (error) => {
+const writeFile = (data) => {
+  fs.writeFile('./dist/sampleIndex.html', data, (error) => {
     if (error) {
       console.log(error);
       return;
@@ -80,13 +85,19 @@ function writeToFile(filename, data) {
       console.log('Your team profiles have been generated!');
     }
   });
-}
+};
 
-createManager()
-  .then(createTeam)
-  .then((teamMembers) => {
-    return generateHTML(teamMembers);
-  });
+createManager();
+// .then(createTeam)
+// .then((teamMembers) => {
+//   return generateHTML(teamMembers);
+// })
+// .then((data) => {
+//   return writeFile(data);
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
 
 // function init() {
 //   console.log(`\n      ** Welcome to Team Profile Generator **

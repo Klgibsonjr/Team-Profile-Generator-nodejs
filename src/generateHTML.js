@@ -15,10 +15,10 @@ const generateManager = (manager) => {
         ID: ${manager.id}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Email: ${manager.email}
+        Email: <a href='mailto:${manager.email}>${manager.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Office Number: ${manager.officeNum}
+        Office Number: ${manager.officeNumber}
       </li>
     </ul>
   </div>
@@ -46,7 +46,7 @@ const generateEngineer = (engineer) => {
         Email: ${engineer.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Office Number: ${engineer.officeNum}
+        GitHub: ${engineer.github}
       </li>
     </ul>
   </div>
@@ -72,7 +72,7 @@ const generateIntern = (intern) => {
         Email: ${intern.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Office Number: ${intern.officeNum}
+        School: ${intern.school}
       </li>
     </ul>
   </div>
@@ -80,8 +80,9 @@ const generateIntern = (intern) => {
 `;
 };
 
-generateHTML = (teamMembers) => {
-  teamArray = [];
+const generateHTML = (teamMembers) => {
+  const teamCardArray = [];
+  console.log(teamMembers);
 
   for (let i = 0; i < teamMembers.length; i++) {
     const employee = teamMembers[i];
@@ -89,23 +90,25 @@ generateHTML = (teamMembers) => {
 
     if (role === 'Manager') {
       const generateManagerCard = generateManager(employee);
-      teamArray.push(generateManagerCard);
+      teamCardArray.push(generateManagerCard);
     }
 
     if (role === 'Engineer') {
       const generateEngineerCard = generateEngineer(employee);
-      teamArray.push(generateEngineerCard);
+      teamCardArray.push(generateEngineerCard);
     }
 
     if (role === 'Intern') {
       const generateInternCard = generateIntern(employee);
-      teamArray.push(generateInternCard);
+      teamCardArray.push(generateInternCard);
     }
   }
 
-  const teamMemberCards = teamArray.join('');
+  const teamMemberCards = teamCardArray.join('');
+  console.log(teamMemberCards);
 
   const generateTeam = generateTeamHTML(teamMemberCards);
+  console.log(generateTeam);
   return generateTeam;
 };
 
