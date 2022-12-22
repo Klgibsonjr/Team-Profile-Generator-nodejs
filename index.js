@@ -65,7 +65,10 @@ const createTeam = () => {
           });
       } else if (data.team_role === 'I do not want to add a team member.') {
         console.log('Your new team has been created!');
-        generateHTML(teamMembers)
+        const testPromise = new Promise((resolve, reject) => {
+          resolve(generateHTML(teamMembers));
+        });
+        testPromise
           .then((data) => {
             return writeFile(data);
           })

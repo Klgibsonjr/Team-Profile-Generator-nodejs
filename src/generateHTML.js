@@ -15,7 +15,7 @@ const generateManager = (manager) => {
         ID: ${manager.id}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Email: <a href='mailto:${manager.email}>${manager.email}
+        Email: <a href='mailto:${manager.email}'>${manager.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
         Office Number: ${manager.officeNumber}
@@ -43,7 +43,7 @@ const generateEngineer = (engineer) => {
         ID: ${engineer.id}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Email: ${engineer.email}
+        Email:<a href='mailto:${engineer.email}'> ${engineer.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
         GitHub: ${engineer.github}
@@ -69,7 +69,7 @@ const generateIntern = (intern) => {
       class="border-2 border-slate-300 divide-y divide-solid rounded-md mx-2 my-8">
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">ID: ${intern.id}</li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
-        Email: ${intern.email}
+        Email: <a href='mailto:${intern.email}'> ${intern.email}
       </li>
       <li class="mx-4 p-2 text-xs md:text-sm lg:text-md">
         School: ${intern.school}
