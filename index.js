@@ -9,6 +9,11 @@ const generateHTML = require('./src/generateHTML');
 const teamMembers = [];
 
 const createManager = () => {
+  console.log(`
+  Welcome to your Team Profile Generator
+  ---------------------------------------
+  Follow the prompts to generate your team's profile page.\n`);
+
   return inquirer.prompt(questions.managerQuestions).then((managerInput) => {
     const manager = new Manager(
       managerInput.manager_name,
@@ -65,10 +70,10 @@ const createTeam = () => {
           });
       } else if (data.team_role === 'I do not want to add a team member.') {
         console.log('Your new team has been created!');
-        const testPromise = new Promise((resolve, reject) => {
+        const teamProfilePage = new Promise((resolve, reject) => {
           resolve(generateHTML(teamMembers));
         });
-        testPromise
+        teamProfilePage
           .then((data) => {
             return writeFile(data);
           })
