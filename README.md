@@ -15,7 +15,7 @@
 - [License](#license)
 - [User Story](#user)
 - [Acceptance Criteria](#acceptance)
-- [Demonstration](#demostration)
+- [Demonstration](#demonstration)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
@@ -71,3 +71,19 @@ node --version
 If Node is not installed, then click on the link to download [Node.js](https://nodejs.org/en/)
 
 Once Node.js is installed, the user should clone the repository from [Github](https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs).
+
+---
+
+## Usage
+
+---
+
+## Contributing
+
+---
+
+## Test
+
+---
+
+## Questions
