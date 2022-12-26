@@ -58,6 +58,30 @@ THEN I exit the application, and the HTML is generated
 
 ## Demonstration
 
+Below is a link to a walkthrough video showing the application at work, as well as showcasing the testing of the application.
+
+[Team Profile Generator Walkthrough Video](https://drive.google.com/file/d/1DZ8CjDu6bLvzyXupyPAHo_r_onqZVDb3/view)
+
+Below are a few screenshots showing the final result of the generated profile page as well as some screenshots of the testing results of the application.
+
+---
+
+### Generated Team Profile HTML Page:
+
+![Team Profile HTML Page](./src/assets/teamProfilePage.png)
+
+---
+
+### Team Profile App running in the terminal:
+
+![Team Profile App](./src/assets/teamProfileApp.png)
+
+---
+
+### Team Profile Generator Testing Results:
+
+![Team Profile Test](./src/assets/teamProfileTest.png)
+
 ---
 
 ## Installation
@@ -76,14 +100,32 @@ Once Node.js is installed, the user should clone the repository from [Github](ht
 
 ## Usage
 
+To run the test, type the following command in the CLI:
+
+```zsh
+npm run test
+```
+
+To run the application, type the following command in the root directory:
+
+```zsh
+node index.js
+```
+
 ---
 
 ## Contributing
+
+For any future contributing please visit my [Github](https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs) account.
 
 ---
 
 ## Test
 
+`Jest` was used for testing purpose in this application.
+
 ---
 
 ## Questions
+
+If you have any questions/concerns you can reach me via email at klgibsonjr@gmail.com, or visit my [Github](https://github.com/Klgibsonjr/Team-Profile-Generator-nodejs) to view more of my projects.
